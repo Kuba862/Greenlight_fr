@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { MapPin, TramFront } from "lucide-react";
-import styles from "./AppHeader.module.scss";
+import styles from "@/components/layout/AppHeader.module.scss";
 
 export default function AppHeader({ actions = null }) {
     return (

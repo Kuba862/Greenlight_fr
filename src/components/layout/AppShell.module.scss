@@ -1,0 +1,140 @@
+.shell {
+  // Jasny motyw
+  --md-bg: #f4f6f2;
+  --md-surface: #ffffff;
+  --md-text: #213b2d;
+  --md-muted: #626e65;
+  --md-border: #e0e6dd;
+
+  --md-primary: #244d38;
+  --md-on-primary: #ffffff;
+
+  --md-soft: #e9f0e4;
+  --md-highlight: #f0f5eb;
+  --md-quiet: #f6f7f4;
+
+  --md-shadow: 0 4px 16px #253c2610;
+
+  color-scheme: light;
+
+  display: grid;
+  grid-template-rows: auto 1fr;
+
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  background-color: var(--md-bg);
+  color: var(--md-text);
+
+  font-family:
+    var(--font-manrope, "Manrope"),
+    system-ui,
+    sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+
+  &,
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  &[data-theme="dark"] {
+    // Ciemny motyw
+    --md-bg: #111914;
+    --md-surface: #1a251e;
+    --md-text: #edf3eb;
+    --md-muted: #aab9ae;
+    --md-border: #35433a;
+
+    --md-primary: #c3e9b8;
+    --md-on-primary: #172c1c;
+
+    --md-soft: #2a3c2b;
+    --md-highlight: #263b29;
+    --md-quiet: #202c23;
+
+    --md-shadow: 0 4px 16px #00000016;
+
+    color-scheme: dark;
+  }
+}
+
+.header {
+  display: flex;
+  align-items: center;
+
+  min-width: 0;
+  min-height: 86px;
+  padding: 20px 28px;
+
+  background-color: var(--md-surface);
+  border-bottom: 1px solid var(--md-border);
+
+  @media (max-width: 650px) {
+    min-height: 76px;
+    padding: 18px 20px;
+  }
+
+  @media (max-width: 380px) {
+    padding: 16px;
+  }
+}
+
+.content {
+  display: grid;
+  grid-template-columns: 265px minmax(0, 1fr);
+
+  min-width: 0;
+
+  @media (max-width: 850px) {
+    grid-template-columns: 230px minmax(0, 1fr);
+  }
+
+  @media (max-width: 650px) {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-rows: auto 1fr;
+  }
+}
+
+.sidebar {
+  min-width: 0;
+  padding: 32px 20px;
+
+  background-color: var(--md-surface);
+  border-right: 1px solid var(--md-border);
+
+  @media (max-width: 850px) {
+    padding: 28px 16px;
+  }
+
+  @media (max-width: 650px) {
+    padding: 22px 20px;
+
+    border-right: none;
+    border-bottom: 1px solid var(--md-border);
+  }
+
+  @media (max-width: 380px) {
+    padding: 20px 14px;
+  }
+}
+
+.main {
+  min-width: 0;
+  padding: 32px 30px;
+
+  @media (max-width: 850px) {
+    padding: 28px 20px;
+  }
+
+  @media (max-width: 650px) {
+    padding: 24px 20px;
+  }
+
+  @media (max-width: 380px) {
+    padding: 22px 12px;
+  }
+}

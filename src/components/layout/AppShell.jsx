@@ -1,4 +1,4 @@
-import styles from "./AppShell.module.scss";
+import styles from "@/components/layout/AppShell.module.scss";
 
 export default function AppShell({
     header, sidebar, children, theme = "light"
