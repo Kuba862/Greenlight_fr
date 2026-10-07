@@ -1,0 +1,95 @@
+.header {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px 28px;
+    width: 100%;
+    min-width: 0;
+
+    @media (max-width: 650px) {
+        gap: 12px;
+    }
+}
+
+.brand {
+    display: inline-flex;
+    align-items: center;
+    flex-shrink: 0;
+    gap: 10px;
+    min-height: 44px;
+    border-radius: 8px;
+    color: var(--md-text);
+    text-decoration: none;
+
+    &:focus-visible {
+        outline: 2px solid var(--md-primary);
+        outline-offset: 5px;
+    }
+}
+
+.brandIcon {
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    width: 36px;
+    height: 38px;
+    border-radius: 11px;
+    background-color: var(--md-primary);
+    color: var(--md-on-primary);
+}
+
+.brandText {
+    font-size: 24px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -1.2px;
+    white-space: nowrap;
+
+    @media (max-width: 650px) {
+        font-size: 22px;
+    }
+}
+
+.brandSecondary {
+    font-weight: 500;
+}
+
+.brandDot {
+    color: var(--md-primary);
+}
+
+.location {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--md-muted);
+    font-size: 12px;
+    line-height: 1.5;
+    white-space: nowrap;
+
+    svg {
+        flex-shrink: 0;
+    }
+
+    @media (max-width: 650px) {
+        display: none;
+    }
+}
+
+.separator {
+    margin-inline: 3px;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    min-width: 0;
+    margin-left: auto;
+
+    @media (max-width: 380px) {
+        flex-basis: 100%;
+        margin-left: 0;
+    }
+}
