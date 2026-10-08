@@ -5,7 +5,7 @@ import { Clock3, TramFront } from "lucide-react";
 
 import AppShell from "@/components/layout/AppShell";
 import AppHeader from "@/components/layout/AppHeader";
-import ThemeToggle from "@/components/ui/ThemeToggle";
+import ThemeToggle from "@/components/UI/ThemeToggle";
 import StopsSidebar from "@/components/stops/StopsSidebar";
 
 import styles from "@/app/page.module.scss";
