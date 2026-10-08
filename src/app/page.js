@@ -6,17 +6,16 @@ import { Clock3, TramFront } from "lucide-react";
 import AppShell from "@/components/layout/AppShell";
 import AppHeader from "@/components/layout/AppHeader";
 import ThemeToggle from "@/components/UI/ThemeToggle";
-import StopSearch from "@/components/stops/StopSearch";
-import StopListItem from "@/components/stops/StopListItem";
+import StopsSidebar from "@/components/stops/StopsSidebar";
 
-import styles from "./page.module.scss";
+import styles from "@/app/page.module.scss";
 
-const DUMB_STOPS = [
-  { id: "bagatela", name: "Teatr Bagatela" },
-  { id: "mogilskie", name: "Rondo Mogilskie" },
-  { id: "dworzec", name: "Dworzec Główny" },
-  { id: "inwalidow", name: "Plac Inwalidów" },
-  { id: "poczta", name: "Poczta Główna" }
+const DEMO_STOPS = [
+  { id: "demo-bagatela", name: "Teatr Bagatela" },
+  { id: "demo-mogilskie", name: "Rondo Mogilskie" },
+  { id: "demo-dworzec", name: "Dworzec Główny" },
+  { id: "demo-inwalidow", name: "Plac Inwalidów" },
+  { id: "demo-poczta", name: "Poczta Główna" },
 ];
 
 function normalizeSearch(value) {
@@ -31,15 +30,19 @@ function normalizeSearch(value) {
 export default function HomePage() {
   const [theme, setTheme] = useState("light");
   const [search, setSearch] = useState("");
-  const [selectedStopId, setSelectedStopId] = useState(DUMB_STOPS[0].id);
+  const [selectedStopId, setSelectedStopId] = useState(
+    DEMO_STOPS[0].id,
+  );
 
   const normalizedSearch = normalizeSearch(search);
 
-  const filteredStops = DUMB_STOPS.filter((stop) => normalizeSearch(stop.name).includes(normalizedSearch),);
+  const filteredStops = DEMO_STOPS.filter((stop) =>
+    normalizeSearch(stop.name).includes(normalizedSearch),
+  );
 
   const selectedStop =
-    DUMB_STOPS.find((stop) => stop.id === selectedStopId) ??
-    DUMB_STOPS[0];
+    DEMO_STOPS.find((stop) => stop.id === selectedStopId) ??
+    DEMO_STOPS[0];
 
   const header = (
     <AppHeader
@@ -53,35 +56,21 @@ export default function HomePage() {
   );
 
   const sidebar = (
-    <div className={styles.sidebarContent}>
-      <div className={styles.sidebarHeading}>
-        <p className={styles.eyebrow}>Dobrze być w drodze</p>
-        <h1>Gdzie wsiadasz?</h1>
-      </div>
-
-      <StopSearch value={search} onChange={setSearch} />
-
-      <p className={styles.resultCount} role="status">Znalezione przystanki: {filteredStops.length}</p>
-
-      {filteredStops.length > 0 ? (
-        <ul className={styles.stopList} aria-label="Przystanki">
-          {filteredStops.map((stop) => (
-            <li key={stop.id}>
-            <StopListItem name={stop.name} description="Przystanek tramwajowy" isSelected={selectedStopId === stop.id} onSelect={() => setSelectedStopId(stop.id)} />
-            </li>
-          ))}
-        </ul>  
-      ): (
-        <div className={styles.emptySearch}>
-          <p>Nie znaleziono przystanku.</p>
-          <span>Spróbuj wpisać inną nazwę.</span>
-        </div>
-      )}
-    </div>
+    <StopsSidebar
+      search={search}
+      onSearchChange={setSearch}
+      stops={filteredStops}
+      selectedStopId={selectedStopId}
+      onSelectStop={setSelectedStopId}
+    />
   );
 
   return (
-    <AppShell theme={theme} header={header} sidebar={sidebar}>
+    <AppShell
+      theme={theme}
+      header={header}
+      sidebar={sidebar}
+    >
       <div className={styles.preview}>
         <span className={styles.demoBadge}>
           Dane przykładowe
@@ -126,5 +115,5 @@ export default function HomePage() {
         </section>
       </div>
     </AppShell>
-  )
+  );
 }
