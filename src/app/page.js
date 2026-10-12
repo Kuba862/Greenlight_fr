@@ -1,15 +1,17 @@
 "use client";
 
 import { useState } from "react";
-import { Clock3, TramFront } from "lucide-react";
+import { Clock3 } from "lucide-react";
 
 import AppShell from "@/components/layout/AppShell";
 import AppHeader from "@/components/layout/AppHeader";
-import ThemeToggle from "@/components/UI/ThemeToggle";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 import StopsSidebar from "@/components/stops/StopsSidebar";
+import StopHeader from "@/components/stops/StopHeader";
 
 import styles from "@/app/page.module.scss";
 
+// Przykładowe dane do sprawdzenia interfejsu.
 const DEMO_STOPS = [
   { id: "demo-bagatela", name: "Teatr Bagatela" },
   { id: "demo-mogilskie", name: "Rondo Mogilskie" },
@@ -33,16 +35,38 @@ export default function HomePage() {
   const [selectedStopId, setSelectedStopId] = useState(
     DEMO_STOPS[0].id,
   );
+  const [favoriteStopIds, setFavoriteStopIds] = useState([]);
 
   const normalizedSearch = normalizeSearch(search);
 
   const filteredStops = DEMO_STOPS.filter((stop) =>
     normalizeSearch(stop.name).includes(normalizedSearch),
-  );
+  ).map((stop) => ({
+    ...stop,
+    description: favoriteStopIds.includes(stop.id)
+      ? "Zapisany przystanek"
+      : "Przystanek tramwajowy",
+  }));
 
   const selectedStop =
     DEMO_STOPS.find((stop) => stop.id === selectedStopId) ??
     DEMO_STOPS[0];
+
+  const isSelectedStopFavorite = favoriteStopIds.includes(
+    selectedStop.id,
+  );
+
+  function handleToggleFavorite() {
+    const stopId = selectedStop.id;
+
+    setFavoriteStopIds((currentIds) => {
+      if (currentIds.includes(stopId)) {
+        return currentIds.filter((id) => id !== stopId);
+      }
+
+      return [...currentIds, stopId];
+    });
+  }
 
   const header = (
     <AppHeader
@@ -76,24 +100,11 @@ export default function HomePage() {
           Dane przykładowe
         </span>
 
-        <div
-          className={styles.selectedStop}
-          aria-live="polite"
-        >
-          <p className={styles.stopType}>
-            <TramFront
-              size={16}
-              strokeWidth={1.75}
-              aria-hidden="true"
-            />
-
-            <span>Przystanek tramwajowy</span>
-          </p>
-
-          <h1>{selectedStop.name}</h1>
-
-          <p className={styles.location}>Kraków</p>
-        </div>
+        <StopHeader
+          name={selectedStop.name}
+          isFavorite={isSelectedStopFavorite}
+          onToggleFavorite={handleToggleFavorite}
+        />
 
         <section
           className={styles.departuresPlaceholder}
