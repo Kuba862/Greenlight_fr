@@ -1,3 +1,5 @@
+"use client";
+import { MapPin, TramFront, Route, Star } from "lucide-react";
 import styles from "@/components/layout/AppNavigation.module.scss";
 
 const NAVIGATION_ITEMS = [
